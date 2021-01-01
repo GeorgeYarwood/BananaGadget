@@ -10,7 +10,7 @@ public class CameraTest : MonoBehaviour
     void Start()
     {
         
-        StartCoroutine(test());
+        //StartCoroutine(test());
     }
 
     // Update is called once per frame

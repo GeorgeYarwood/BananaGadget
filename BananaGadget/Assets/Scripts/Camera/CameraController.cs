@@ -44,6 +44,12 @@ public class CameraController : MonoBehaviour
     static bool movingtotarget;
 
 
+    //Array of queued RayCast events
+    static List <RayEvents> RayQueue = new List<RayEvents>();
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -105,6 +111,13 @@ public class CameraController : MonoBehaviour
         
     }
 
+
+    static public void AddRayEvent(string tag, System.Action function)  
+    {
+        RayEvents currentEvent = new RayEvents(tag, function);
+        RayQueue.Add(currentEvent);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -141,6 +154,25 @@ public class CameraController : MonoBehaviour
             Quaternion baseRot = Player.transform.rotation;
             Quaternion modRot = Quaternion.Euler(baseRot.x + rotX, baseRot.y + rotY, baseRot.z + rotZ);
             mainCam.transform.rotation = modRot;
+        }
+
+        //If we left click
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Casts a ray
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                for(int i = 0; i< RayQueue.Count; i++) 
+                {
+                    if(hit.transform.tag == RayQueue[i].Tag) 
+                    {
+                        RayQueue[i].FunctionToRun();
+                    }
+                }
+            }
+
         }
     }
 }
