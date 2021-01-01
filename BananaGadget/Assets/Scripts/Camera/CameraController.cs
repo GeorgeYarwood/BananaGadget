@@ -15,8 +15,12 @@ public class CameraController : MonoBehaviour
 
     //Set to false to prevent camera from following the player
     static bool FollowPlayer;
-
+    
+    //Syncs camera with desired position
     static bool SyncNow;
+
+    //Time camera will wait before resetting to default position
+    float ResetTime = 4f;
 
     //Used to animate to
     GameObject shadowcam;
@@ -43,16 +47,24 @@ public class CameraController : MonoBehaviour
     //True when we are in the process of moving towards a target
     static bool movingtotarget;
 
+    float lastMouse;
 
     //Array of queued RayCast events
     static List <RayEvents> RayQueue = new List<RayEvents>();
 
+    //Mouse sensitivity
+    float MouseSens = 2f;
 
-
+    Coroutine currentCoroutine = null;
 
     // Start is called before the first frame update
     void Start()
     {
+
+        
+
+        Cursor.lockState = CursorLockMode.Locked;
+
         FollowPlayer = true;
 
         //Initialise
@@ -64,6 +76,7 @@ public class CameraController : MonoBehaviour
         //Find our player in the scene
         Player = GameObject.FindGameObjectWithTag("Player");
 
+        currentCoroutine = StartCoroutine(CamReset());
 
         //TESTING
         /*
@@ -118,6 +131,24 @@ public class CameraController : MonoBehaviour
         RayQueue.Add(currentEvent);
     }
 
+    //If player doesn't touch mouse for certain amount of time, reset the camera to default position
+    IEnumerator CamReset() 
+    {
+        yield return new WaitForSeconds(ResetTime);
+        Quaternion baseRot = Player.transform.rotation;
+        Quaternion modRot = Quaternion.Euler(baseRot.x + rotX, baseRot.y + rotY, baseRot.z + rotZ);
+
+        //mainCam.transform.rotation = modRot;
+
+
+        shadowcam.transform.position = mainCam.transform.position;
+        shadowcam.transform.rotation = modRot;
+        Anim = true;
+        SyncNow = true;
+
+
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -151,9 +182,23 @@ public class CameraController : MonoBehaviour
         {
             //Apply offset to the final position and rotation based off the player's current position
             mainCam.transform.position = Player.transform.position - offset;
-            Quaternion baseRot = Player.transform.rotation;
-            Quaternion modRot = Quaternion.Euler(baseRot.x + rotX, baseRot.y + rotY, baseRot.z + rotZ);
-            mainCam.transform.rotation = modRot;
+           
+
+            //Mouse events
+            float rotateHorizontal = Input.GetAxis("Mouse X");
+            float rotateVertical = Input.GetAxis("Mouse Y");
+            transform.RotateAround(Player.transform.position, -Vector3.up, rotateHorizontal * -MouseSens);
+            transform.RotateAround(Vector3.zero, transform.right, rotateVertical * -MouseSens);
+
+            //If mouse has moved since last update
+            if (lastMouse != rotateHorizontal) 
+            {
+                movingtotarget = false;
+                StopCoroutine(currentCoroutine);
+                currentCoroutine = StartCoroutine(CamReset());
+            }
+
+            lastMouse = rotateHorizontal;
         }
 
         //If we left click
