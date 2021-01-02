@@ -3150,7 +3150,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 76b83bc96dad10e4a90186298a38b887, type: 2}
   energyTxt: {fileID: 1425649586}
   healthTxt: {fileID: 1734350785}
-  DmgEvent: 0
+  rangeDmgEvent: 0
+  meleeDmgEvent: 0
   DoorEvent: 0
   Respawn: {fileID: 1460522939}
 --- !u!1 &1543903896

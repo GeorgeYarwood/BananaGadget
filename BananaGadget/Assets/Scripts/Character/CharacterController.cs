@@ -315,7 +315,7 @@ public class CharacterController : MonoBehaviour
     IEnumerator JumpCooldown() 
     {
         JCoolDown = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3);
         JCoolDown = false;
     }
 }
