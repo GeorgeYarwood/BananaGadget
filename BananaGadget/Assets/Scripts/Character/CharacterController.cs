@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour
     //Movement Speed
     float MoveSpeed = 20f;
     //Drains over time
-    float energycapacity = 2000;
+    float energycapacity = 400;
     float MaxJump = 300f;
     bool FireResitant = false;
     float Health = 100f;
@@ -49,7 +49,8 @@ public class CharacterController : MonoBehaviour
     public Text healthTxt;
 
 
-    public int DmgEvent;
+    public int rangeDmgEvent;
+    public int meleeDmgEvent;
     public int DoorEvent;
 
     public GameObject Respawn;
@@ -70,9 +71,8 @@ public class CharacterController : MonoBehaviour
 
         ApplyAbilities();
 
-        CameraController.AddRayEvent("test", Test);
-        DmgEvent = CameraController.AddRayEvent("Enemy", Damage);
-        DoorEvent = CameraController.AddRayEvent("doorButton", Door);
+        //CameraController.AddRayEvent("test", Test);
+        DoorEvent = CameraController.AddRayEvent("doorButton", Door, 5);
     }
 
     private void ResetStats()
@@ -101,9 +101,9 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    public void Damage() 
+    public void RangedDamage() 
     {
-        Transform currentTransform = CameraController.RayQueue[DmgEvent].hit;
+        Transform currentTransform = CameraController.RayQueue[rangeDmgEvent].hit;
 
         Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
 
@@ -115,6 +115,22 @@ public class CharacterController : MonoBehaviour
         {
             Debug.Log("Enemey not available, perhaps it's dead?");
             
+        }
+    }
+    public void MeleeDamage()
+    {
+        Transform currentTransform = CameraController.RayQueue[meleeDmgEvent].hit;
+
+        Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
+
+        try
+        {
+            currentEnemy.Health -= currentDmg;
+        }
+        catch
+        {
+            Debug.Log("Enemey not available, perhaps it's dead?");
+
         }
     }
 
@@ -142,18 +158,22 @@ public class CharacterController : MonoBehaviour
 
 
             //If we have a melee ability
-            if (currentAbilities[i].abType.Equals(abilityType.melee)) 
+            if (currentAbilities[i].abType == global::abilityType.melee)
             {
-               
+                //Set melee damage function
+                meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 5);
+
             }
             //If we have a ranged ability
-            if (currentAbilities[i].abType.Equals(abilityType.ranged))
+            if (currentAbilities[i].abType == global::abilityType.ranged)
             {
-               
+                //Set melee damage function
+                rangeDmgEvent = CameraController.AddRayEvent("Enemy", RangedDamage, 40);
+
             }
 
             //If we have a movement ability
-            if (currentAbilities[i].abType.Equals(abilityType.movement))
+            if (currentAbilities[i].abType == global::abilityType.movement)
             {
 
             }

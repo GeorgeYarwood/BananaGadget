@@ -143,9 +143,9 @@ public class CameraController : MonoBehaviour
     }
 
 
-    static public int AddRayEvent(string tag, System.Action function)
+    static public int AddRayEvent(string tag, System.Action function, float dist)
     {
-        RayEvents currentEvent = new RayEvents(tag, function);
+        RayEvents currentEvent = new RayEvents(tag, function, dist);
         RayQueue.Add(currentEvent);
         //Return the position so we can access the transform later
         return RayQueue.Count - 1;
@@ -255,9 +255,18 @@ public class CameraController : MonoBehaviour
                 {
                     if (hit.transform.tag == RayQueue[i].Tag)
                     {
-                        //Put the transform back into the thing
-                        RayQueue[i].hit = hit.transform;
-                        RayQueue[i].FunctionToRun();
+                        if(Vector3.Magnitude(Player.transform.position) < RayQueue[i].dist) 
+                        {
+
+                            //Put the transform back into the thing
+                            RayQueue[i].hit = hit.transform;
+                            RayQueue[i].FunctionToRun();
+                        }
+                        else 
+                        {
+                            Debug.Log("Ray hit, but out of user defined range");
+                        }
+
                     }
                 }
             }
@@ -265,7 +274,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    //clamp an angle
+    //Clamp an angle
     public static float ClampAngle(float angle, float min, float max)
     {
         if (angle < -360F)

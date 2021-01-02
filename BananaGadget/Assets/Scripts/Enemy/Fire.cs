@@ -13,10 +13,19 @@ public class Fire : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         player = other.gameObject.GetComponentInParent<CharacterController>();
-        player.currentMoveSpeed -= speedpenalty;
-        infire = true;
-        //Show fire effect on screen
+        if (!player.currentfireResist) 
+        {
+            player.currentMoveSpeed -= speedpenalty;
+            infire = true;
+            //Show fire effect on screen
+        }
+        else 
+        {
+            Debug.Log("Player resistant to fire!");
+        }
+
     }
 
     private void Update()
@@ -30,10 +39,17 @@ public class Fire : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        infire = false;
-        player = other.gameObject.GetComponentInParent<CharacterController>();
-        player.currentMoveSpeed += speedpenalty;
-        //Disable fire effect
+        if (!player.currentfireResist)
+        {
+            infire = false;
+            player = other.gameObject.GetComponentInParent<CharacterController>();
+            player.currentMoveSpeed += speedpenalty;
+            //Disable fire effect
+        }
+        else
+        {
+            Debug.Log("Player resistant to fire!");
+        }
     }
 
 }

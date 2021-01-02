@@ -3147,6 +3147,7 @@ MonoBehaviour:
   currentAbilities:
   - {fileID: 11400000, guid: 786488a422d14734aa950fe1458c3e33, type: 2}
   - {fileID: 11400000, guid: 74b6be1c7d6cccc4ea06a6505693a043, type: 2}
+  - {fileID: 11400000, guid: 76b83bc96dad10e4a90186298a38b887, type: 2}
   energyTxt: {fileID: 1425649586}
   healthTxt: {fileID: 1734350785}
   DmgEvent: 0
