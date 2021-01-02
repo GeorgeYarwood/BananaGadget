@@ -17,6 +17,7 @@ MonoBehaviour:
   Damage: 0
   Energy: 100
   FireResitant: 0
+  FrostResitant: 0
   abType: 2
   abilityName: Battery
   abilityIcon: {fileID: 0}

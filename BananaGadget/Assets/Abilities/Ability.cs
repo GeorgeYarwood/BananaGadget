@@ -20,6 +20,7 @@ public class Ability : ScriptableObject
     public float Energy;
 
     public bool FireResitant;
+    public bool FrostResitant;
 
     public abilityType abType;
 

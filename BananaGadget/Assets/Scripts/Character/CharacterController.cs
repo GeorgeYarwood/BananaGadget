@@ -25,6 +25,7 @@ public class CharacterController : MonoBehaviour
     float energycapacity = 400;
     float MaxJump = 300f;
     bool FireResitant = false;
+    bool FrostResitant = false;
     float Health = 100f;
     float Dmg = 4f;
 
@@ -34,6 +35,7 @@ public class CharacterController : MonoBehaviour
     public float currentEnergyCapacity;
     public float currentMaxJump;
     public bool  currentfireResist;
+    public bool  currentfrostResist;
     public float currentHealth;
     public float currentDmg;
 
@@ -80,7 +82,11 @@ public class CharacterController : MonoBehaviour
         currentMoveSpeed = MoveSpeed;
         currentEnergyCapacity = energycapacity;
         currentMaxJump = MaxJump;
+
+
+
         currentfireResist = FireResitant;
+        currentfrostResist = FrostResitant;
         currentHealth = Health;
         currentDmg = Dmg;
     }
@@ -154,6 +160,12 @@ public class CharacterController : MonoBehaviour
             if (!currentfireResist) 
             {
                 currentfireResist = currentAbilities[i].FireResitant;
+            }
+
+            //Apply frost resistance
+            if (!currentfrostResist)
+            {
+                currentfrostResist = currentAbilities[i].FrostResitant;
             }
 
 

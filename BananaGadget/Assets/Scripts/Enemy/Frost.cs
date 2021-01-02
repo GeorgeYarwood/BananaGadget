@@ -5,7 +5,7 @@ using UnityEngine;
 public class Frost : MonoBehaviour
 {
     float speedreduction = 4f;
-
+    CharacterController player;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,17 +21,34 @@ public class Frost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CharacterController player = other.gameObject.GetComponentInParent<CharacterController>();
-        player.currentMoveSpeed -= speedreduction;
-        //Show frost effect on screen
+        player = other.gameObject.GetComponentInParent<CharacterController>();
+        if (!player.currentfrostResist)
+        {
+           
+            player.currentMoveSpeed -= speedreduction;
+            //Show frost effect on screen
+        }
+        else
+        {
+            Debug.Log("Player is immune to frost!");
+        }
+
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        CharacterController player = other.gameObject.GetComponentInParent<CharacterController>();
-        player.currentMoveSpeed += speedreduction;
-        //Disable frost effect
+        player = other.gameObject.GetComponentInParent<CharacterController>();
+
+        if (!player.currentfrostResist)
+        {
+            player.currentMoveSpeed += speedreduction;
+            //Disable frost effect
+        }
+        else
+        {
+            Debug.Log("Player is immune to frost!");
+        }
     }
 
 }
