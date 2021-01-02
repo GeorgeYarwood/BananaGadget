@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
     float lastMouse;
 
     //Array of queued RayCast events
-    static List<RayEvents> RayQueue = new List<RayEvents>();
+    static public List<RayEvents> RayQueue = new List<RayEvents>();
 
     //Mouse sensitivity
     float MouseSens = 2f;
@@ -143,10 +143,12 @@ public class CameraController : MonoBehaviour
     }
 
 
-    static public void AddRayEvent(string tag, System.Action function)
+    static public int AddRayEvent(string tag, System.Action function)
     {
         RayEvents currentEvent = new RayEvents(tag, function);
         RayQueue.Add(currentEvent);
+        //Return the position so we can access the transform later
+        return RayQueue.Count - 1;
     }
 
     //If player doesn't touch mouse for certain amount of time, reset the camera to default position
@@ -198,14 +200,11 @@ public class CameraController : MonoBehaviour
 
         else if (FollowPlayer)
         {
-         
-
-
             //Mouse events
             rotYAxis += Input.GetAxis("Mouse X") * MouseSens;
             rotXAxis -= Input.GetAxis("Mouse Y") * MouseSens;
 
-            //Clamp angle
+            //Clamp angles
 
             //Up and down
             rotXAxis = ClampAngle(rotXAxis, -60f, 60f);
@@ -256,6 +255,8 @@ public class CameraController : MonoBehaviour
                 {
                     if (hit.transform.tag == RayQueue[i].Tag)
                     {
+                        //Put the transform back into the thing
+                        RayQueue[i].hit = hit.transform;
                         RayQueue[i].FunctionToRun();
                     }
                 }

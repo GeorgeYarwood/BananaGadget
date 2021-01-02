@@ -21,7 +21,7 @@ public class CharacterController : MonoBehaviour
 
     float MaxJump = 25f;
     bool FireResitant = false;
-    
+    float Health = 100f;
 
     //Array of all available abilities
     public Ability[] abilities = new Ability[2];
@@ -34,7 +34,7 @@ public class CharacterController : MonoBehaviour
     public Text energyTxt;
 
 
-
+    public int DmgEvent;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +46,7 @@ public class CharacterController : MonoBehaviour
         ApplyAbilities();
 
         CameraController.AddRayEvent("test", Test);
+        DmgEvent = CameraController.AddRayEvent("Enemy", Damage);
     }
 
     public void Test() 
@@ -54,9 +55,13 @@ public class CharacterController : MonoBehaviour
 
     }
 
-    public void Fire() 
+    public void Damage() 
     {
-        
+        Transform currentTransform = CameraController.RayQueue[DmgEvent].hit;
+
+        Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
+
+        currentEnemy.Health -= 5f;
     }
 
     public void ApplyAbilities() 
