@@ -17,6 +17,9 @@ public class CharacterController : MonoBehaviour
     public States PlayerState;
 
 
+    public Enemy[] enemies = new Enemy[4];
+
+
     //Base values
 
     //Movement Speed
@@ -74,7 +77,7 @@ public class CharacterController : MonoBehaviour
         ApplyAbilities();
 
         //CameraController.AddRayEvent("test", Test);
-        DoorEvent = CameraController.AddRayEvent("doorButton", Door, 5);
+        DoorEvent = CameraController.AddRayEvent("doorButton", Door, 10);
     }
 
     private void ResetStats()
@@ -173,7 +176,7 @@ public class CharacterController : MonoBehaviour
             if (currentAbilities[i].abType == global::abilityType.melee)
             {
                 //Set melee damage function
-                meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 5);
+                meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 10);
 
             }
             //If we have a ranged ability
@@ -266,6 +269,13 @@ public class CharacterController : MonoBehaviour
     {
         //Move player back to respawn point
         Player.transform.position = Respawn.transform.position;
+
+        //Re-enable and reset all enemies
+        for(int i = 0; i < enemies.Length; i++) 
+        {
+            enemies[i].Health = 100f;
+            enemies[i].gameObject.SetActive(true);
+        }
 
     }
     

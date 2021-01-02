@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
         HealthTxt.text = Health.ToString();
         if(Health <= 0f) 
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
