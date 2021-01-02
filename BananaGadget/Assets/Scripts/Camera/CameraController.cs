@@ -8,14 +8,15 @@ public class CameraController : MonoBehaviour
     GameObject Player;
 
     //Offset that will be applied to camera upon movement
-    Vector3 offset = new Vector3(0, -2.5f, 6);
+    Quaternion Rotoffset = Quaternion.Euler(-5f, 0, 0);
+    Vector3 Posoffset = new Vector3(0, 3, -6);
     int rotX = 11;
     int rotY = 0;
     int rotZ = 0;
 
     //Set to false to prevent camera from following the player
     static bool FollowPlayer;
-    
+
     //Syncs camera with desired position
     static bool SyncNow;
 
@@ -24,6 +25,8 @@ public class CameraController : MonoBehaviour
 
     //Used to animate to
     GameObject shadowcam;
+
+    GameObject shadowplayer;
 
     //Used by smoothdamp
     Vector3 Velocity = Vector3.zero;
@@ -50,22 +53,26 @@ public class CameraController : MonoBehaviour
     float lastMouse;
 
     //Array of queued RayCast events
-    static List <RayEvents> RayQueue = new List<RayEvents>();
+    static List<RayEvents> RayQueue = new List<RayEvents>();
 
     //Mouse sensitivity
     float MouseSens = 2f;
 
     Coroutine currentCoroutine = null;
 
+
+    float rotYAxis;
+    float rotXAxis;
+
+    Vector3 initialVector;
+    float dist;
+
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         Cursor.lockState = CursorLockMode.Locked;
 
         FollowPlayer = true;
-
-        //Initialise
-        shadowcam = new GameObject();
 
         //Find our camera
         mainCam = FindObjectOfType<Camera>();
@@ -73,7 +80,21 @@ public class CameraController : MonoBehaviour
         //Find our player in the scene
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        currentCoroutine = StartCoroutine(CamReset());
+
+        //Initialise
+        shadowcam = new GameObject();
+        shadowplayer = new GameObject();
+
+        initialVector = Player.transform.position - Vector3.up;
+
+        rotYAxis = transform.eulerAngles.y;
+        rotXAxis = transform.eulerAngles.x;
+
+        dist = Vector3.Magnitude(initialVector);
+
+
+       
+        //currentCoroutine = StartCoroutine(CamReset());
 
         //TESTING
         /*
@@ -114,22 +135,22 @@ public class CameraController : MonoBehaviour
 
     }
 
-    static public void BackToPlayer (bool Animate)
+    static public void BackToPlayer(bool Animate)
     {
         movingtotarget = false;
         FollowPlayer = true;
-        
+
     }
 
 
-    static public void AddRayEvent(string tag, System.Action function)  
+    static public void AddRayEvent(string tag, System.Action function)
     {
         RayEvents currentEvent = new RayEvents(tag, function);
         RayQueue.Add(currentEvent);
     }
 
     //If player doesn't touch mouse for certain amount of time, reset the camera to default position
-    IEnumerator CamReset() 
+    IEnumerator CamReset()
     {
         yield return new WaitForSeconds(ResetTime);
         Quaternion baseRot = Player.transform.rotation;
@@ -159,12 +180,12 @@ public class CameraController : MonoBehaviour
         {
             shadowcam.transform.position = shadowPos;
             shadowcam.transform.rotation = shadowRot;
-            if (Anim) 
+            if (Anim)
             {
                 movingtotarget = true;
 
             }
-            else 
+            else
             {
                 mainCam.transform.position = shadowPos;
                 mainCam.transform.rotation = shadowRot;
@@ -177,25 +198,50 @@ public class CameraController : MonoBehaviour
 
         else if (FollowPlayer)
         {
-            //Apply offset to the final position and rotation based off the player's current position
-            mainCam.transform.position = Player.transform.position - offset;
-           
+         
+
 
             //Mouse events
-            float rotateHorizontal = Input.GetAxis("Mouse X");
-            float rotateVertical = Input.GetAxis("Mouse Y");
-            transform.RotateAround(Player.transform.position, -Vector3.up, rotateHorizontal * -MouseSens);
-            transform.RotateAround(Vector3.zero, transform.right, rotateVertical * -MouseSens);
+            rotYAxis += Input.GetAxis("Mouse X") * MouseSens;
+            rotXAxis -= Input.GetAxis("Mouse Y") * MouseSens;
+
+            //Clamp angle
+
+            //Up and down
+            rotXAxis = ClampAngle(rotXAxis, -60f, 60f);
+
+            //Side to side
+            rotYAxis = ClampAngle(rotYAxis, -60f, 60f);
+
+            Quaternion toRotation = Quaternion.Euler(rotXAxis, rotYAxis, 0);
+            Quaternion rotation = toRotation;
+
+            Vector3 negDistance = new Vector3(0, 0, -dist);
+            Vector3 position = rotation * negDistance + Vector3.zero;
+
+            transform.rotation = rotation;
+            transform.position = position;
+             
+
+
+           transform.position = Player.transform.position;
+            transform.position += Posoffset;
+
+
+
+            transform.rotation *= Rotoffset;
+            //transform.position += Posoffset;
+
 
             //If mouse has moved since last update
-            if (lastMouse != rotateHorizontal) 
+            if (lastMouse != rotXAxis)
             {
                 movingtotarget = false;
-                StopCoroutine(currentCoroutine);
-                currentCoroutine = StartCoroutine(CamReset());
+                //StopCoroutine(currentCoroutine);
+                //currentCoroutine = StartCoroutine(CamReset());
             }
 
-            lastMouse = rotateHorizontal;
+            lastMouse = rotXAxis;
         }
 
         //If we left click
@@ -206,9 +252,9 @@ public class CameraController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                for(int i = 0; i< RayQueue.Count; i++) 
+                for (int i = 0; i < RayQueue.Count; i++)
                 {
-                    if(hit.transform.tag == RayQueue[i].Tag) 
+                    if (hit.transform.tag == RayQueue[i].Tag)
                     {
                         RayQueue[i].FunctionToRun();
                     }
@@ -216,5 +262,15 @@ public class CameraController : MonoBehaviour
             }
 
         }
+    }
+
+    //clamp an angle
+    public static float ClampAngle(float angle, float min, float max)
+    {
+        if (angle < -360F)
+            angle += 360F;
+        if (angle > 360F)
+            angle -= 360F;
+        return Mathf.Clamp(angle, min, max);
     }
 }
