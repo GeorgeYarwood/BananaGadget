@@ -49,7 +49,7 @@ public class CharacterController : MonoBehaviour
 
 
     public int DmgEvent;
-
+    public int DoorEvent;
 
     public GameObject Respawn;
 
@@ -71,6 +71,7 @@ public class CharacterController : MonoBehaviour
 
         CameraController.AddRayEvent("test", Test);
         DmgEvent = CameraController.AddRayEvent("Enemy", Damage);
+        DoorEvent = CameraController.AddRayEvent("doorButton", Door);
     }
 
     private void ResetStats()
@@ -86,6 +87,16 @@ public class CharacterController : MonoBehaviour
     public void Test() 
     {
         Debug.Log("Working!");
+
+    }
+
+    public void Door()
+    {
+        Transform currentDoor = CameraController.RayQueue[DoorEvent].hit;
+
+        Animator anim = currentDoor.GetComponentInChildren<Animator>();
+
+        anim.SetTrigger("Open");
 
     }
 
