@@ -30,12 +30,12 @@ public class CharacterController : MonoBehaviour
 
 
     //Values we adjust
-    float currentMoveSpeed;
-    float currentEnergyCapacity;
-    float currentMaxJump;
-    bool  currentfireResist;
-    float currentHealth;
-    float currentDmg;
+    public float currentMoveSpeed;
+    public float currentEnergyCapacity;
+    public float currentMaxJump;
+    public bool  currentfireResist;
+    public float currentHealth;
+    public float currentDmg;
 
     //Array of all available abilities
     public Ability[] abilities = new Ability[2];
@@ -46,6 +46,7 @@ public class CharacterController : MonoBehaviour
 
 
     public Text energyTxt;
+    public Text healthTxt;
 
 
     public int DmgEvent;
@@ -166,7 +167,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         energyTxt.text = "Energy Capacity: " + currentEnergyCapacity.ToString();
-
+        healthTxt.text = "Health: " + currentHealth.ToString();
 
         if(currentEnergyCapacity > 0f)
         {
@@ -240,7 +241,7 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         //If we're not in the air
-        if(Player.transform.position.y < 1f) 
+        if(Player.transform.position.y < 2f) 
         {
             isAirborne = false;
 
@@ -248,24 +249,24 @@ public class CharacterController : MonoBehaviour
             //Keyboard events
             if (Input.GetKey("w"))
             {
-                rb.AddForce(0, 0, MoveSpeed);
+                rb.AddForce(0, 0, currentMoveSpeed);
 
             }
             if (Input.GetKey("s"))
             {
-                rb.AddForce(0, 0, -MoveSpeed);
+                rb.AddForce(0, 0, -currentMoveSpeed);
 
             }
 
             if (Input.GetKey("d"))
             {
-                rb.AddForce(MoveSpeed, 0, 0);
+                rb.AddForce(currentMoveSpeed, 0, 0);
 
             }
 
             if (Input.GetKey("a"))
             {
-                rb.AddForce(-MoveSpeed, 0, 0);
+                rb.AddForce(-currentMoveSpeed, 0, 0);
 
             }
         }
