@@ -168,7 +168,7 @@ public class CharacterController : MonoBehaviour
             RespawnPlayer();
         }
 
-
+        
     }
 
     void RespawnPlayer() 
@@ -181,12 +181,10 @@ public class CharacterController : MonoBehaviour
     // For dem fast physex init
     void FixedUpdate()
     {
-
-        //Keybaord events
-
-        if (!JCoolDown)
+        //If we're not in the air
+        if(Player.transform.position.y < 1f) 
         {
-
+            //Keyboard events
             if (Input.GetKey("w"))
             {
                 rb.AddForce(0, 0, MoveSpeed);
@@ -209,8 +207,12 @@ public class CharacterController : MonoBehaviour
                 rb.AddForce(-MoveSpeed, 0, 0);
 
             }
-
         }
+
+
+      
+
+
 
 
         if (Input.GetKey("space"))
