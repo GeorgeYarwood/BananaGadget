@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c61dade2fa00494197772b555d8d761, type: 3}
   m_Name: HighJump
   m_EditorClassIdentifier: 
-  Jump: 85
+  Jump: 1000
   Speed: 0
   Damage: 0
   Energy: 0

@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
     float MoveSpeed = 20f;
     //Drains over time
     float energycapacity = 2000;
-    float MaxJump = 25f;
+    float MaxJump = 300f;
     bool FireResitant = false;
     float Health = 100f;
     float Dmg = 4f;
@@ -48,6 +48,8 @@ public class CharacterController : MonoBehaviour
 
 
     public GameObject Respawn;
+
+    bool JCoolDown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -182,36 +184,53 @@ public class CharacterController : MonoBehaviour
 
         //Keybaord events
 
-        if (Input.GetKey("w"))
+        if (!JCoolDown)
         {
-            rb.AddForce(0, 0, MoveSpeed);
-        
-        }
-        if (Input.GetKey("s"))
-        {
-            rb.AddForce(0, 0, -MoveSpeed);
 
-        }
+            if (Input.GetKey("w"))
+            {
+                rb.AddForce(0, 0, MoveSpeed);
 
-        if (Input.GetKey("d"))
-        {
-            rb.AddForce(MoveSpeed, 0, 0);
+            }
+            if (Input.GetKey("s"))
+            {
+                rb.AddForce(0, 0, -MoveSpeed);
 
-        }
+            }
 
-        if (Input.GetKey("a"))
-        {
-            rb.AddForce(-MoveSpeed, 0, 0);
+            if (Input.GetKey("d"))
+            {
+                rb.AddForce(MoveSpeed, 0, 0);
+
+            }
+
+            if (Input.GetKey("a"))
+            {
+                rb.AddForce(-MoveSpeed, 0, 0);
+
+            }
 
         }
 
 
         if (Input.GetKey("space"))
         {
-            rb.AddForce(0, MaxJump, 0);
+            if (!JCoolDown) 
+            {
+                rb.AddForce(0, currentMaxJump, 0);
+                StartCoroutine(JumpCooldown());
+            }
+            
 
         }
 
 
+    }
+
+    IEnumerator JumpCooldown() 
+    {
+        JCoolDown = true;
+        yield return new WaitForSeconds(1.5f);
+         JCoolDown = false;
     }
 }

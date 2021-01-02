@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 258198478}
   - component: {fileID: 258198477}
   - component: {fileID: 258198480}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 369782641}
   - component: {fileID: 369782640}
   - component: {fileID: 369782639}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -647,7 +647,7 @@ GameObject:
   - component: {fileID: 443371056}
   - component: {fileID: 443371055}
   - component: {fileID: 443371054}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 450301911}
   - component: {fileID: 450301910}
   - component: {fileID: 450301909}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 521221257}
   - component: {fileID: 521221256}
   - component: {fileID: 521221255}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -935,7 +935,7 @@ GameObject:
   - component: {fileID: 533243965}
   - component: {fileID: 533243964}
   - component: {fileID: 533243963}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 598760480}
   - component: {fileID: 598760479}
   - component: {fileID: 598760478}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1127,7 +1127,7 @@ GameObject:
   - component: {fileID: 612465173}
   - component: {fileID: 612465172}
   - component: {fileID: 612465171}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1220,7 +1220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 662180001}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -1254,7 +1254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 671924046}
   - component: {fileID: 671924047}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: leg0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 732028667}
   - component: {fileID: 732028666}
   - component: {fileID: 732028665}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MainBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1396,7 +1396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763272659}
   - component: {fileID: 763272658}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: leg2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1496,7 +1496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841404698}
   - component: {fileID: 841404697}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1641,7 +1641,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959795291}
   - component: {fileID: 959795292}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: leg1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1863,7 +1863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1207782909}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Other
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -1898,7 +1898,7 @@ GameObject:
   - component: {fileID: 1310061174}
   - component: {fileID: 1310061173}
   - component: {fileID: 1310061172}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2283,7 +2283,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1447566150}
   - component: {fileID: 1447566151}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: arm0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2424,7 +2424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1518394611}
   - component: {fileID: 1518394612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: other0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2471,7 +2471,7 @@ GameObject:
   - component: {fileID: 1519595623}
   - component: {fileID: 1519595622}
   - component: {fileID: 1519595621}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2566,7 +2566,7 @@ GameObject:
   - component: {fileID: 1528997356}
   - component: {fileID: 1528997355}
   - component: {fileID: 1528997357}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2724,7 +2724,7 @@ GameObject:
   - component: {fileID: 1629986939}
   - component: {fileID: 1629986938}
   - component: {fileID: 1629986937}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2818,7 +2818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724606228}
   - component: {fileID: 1724606229}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2941,7 +2941,7 @@ GameObject:
   - component: {fileID: 1754951234}
   - component: {fileID: 1754951233}
   - component: {fileID: 1754951232}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3034,7 +3034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1784313791}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -3070,7 +3070,7 @@ GameObject:
   - component: {fileID: 1809839872}
   - component: {fileID: 1809839871}
   - component: {fileID: 1809839870}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3165,7 +3165,7 @@ GameObject:
   - component: {fileID: 1849101597}
   - component: {fileID: 1849101596}
   - component: {fileID: 1849101595}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3259,7 +3259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935380251}
   - component: {fileID: 1935380250}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: other1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3306,7 +3306,7 @@ GameObject:
   - component: {fileID: 2040020865}
   - component: {fileID: 2040020864}
   - component: {fileID: 2040020863}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3497,7 +3497,7 @@ GameObject:
   - component: {fileID: 2104442519}
   - component: {fileID: 2104442518}
   - component: {fileID: 2104442517}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
