@@ -7,11 +7,15 @@ public class CharacterController : MonoBehaviour
 {
 
     public enum abilityType { melee, ranged, movement };
+    public enum States { idle, walk, jump };
 
     //Player in our scene
     GameObject Player;
 
     Rigidbody rb;
+
+    public States PlayerState;
+
 
     //Base values
 
@@ -50,6 +54,8 @@ public class CharacterController : MonoBehaviour
     public GameObject Respawn;
 
     bool JCoolDown = false;
+
+    bool isAirborne= false;
 
     // Start is called before the first frame update
     void Start()
@@ -168,7 +174,48 @@ public class CharacterController : MonoBehaviour
             RespawnPlayer();
         }
 
-        
+
+
+        switch (PlayerState) 
+        {
+            case States.idle:
+                if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
+                {
+                    PlayerState = States.walk;
+
+                }
+                if (isAirborne)
+                {
+                    PlayerState = States.jump;
+                }
+
+                break;
+
+            case States.walk:
+
+                if (!Input.GetKey("w") || !Input.GetKey("s") || !Input.GetKey("a") || !Input.GetKey("d"))
+                {
+                    PlayerState = States.idle;
+
+                }
+                if (isAirborne)
+                {
+                    PlayerState = States.jump;
+                }
+                break;
+            case States.jump:
+              
+                if(!isAirborne)
+                {
+                    PlayerState = States.idle;
+                }
+
+                break;
+        }
+       
+
+
+        Debug.Log(PlayerState);
     }
 
     void RespawnPlayer() 
@@ -177,13 +224,16 @@ public class CharacterController : MonoBehaviour
         Player.transform.position = Respawn.transform.position;
 
     }
-
+    
     // For dem fast physex init
     void FixedUpdate()
     {
         //If we're not in the air
         if(Player.transform.position.y < 1f) 
         {
+            isAirborne = false;
+
+
             //Keyboard events
             if (Input.GetKey("w"))
             {
@@ -210,18 +260,19 @@ public class CharacterController : MonoBehaviour
         }
 
 
-      
 
 
 
 
-        if (Input.GetKey("space"))
-        {
-            if (!JCoolDown) 
+            if (Input.GetKey("space"))
             {
-                rb.AddForce(0, currentMaxJump, 0);
-                StartCoroutine(JumpCooldown());
-            }
+                if (!JCoolDown) 
+                {
+                    isAirborne = true;
+                    rb.AddForce(0, currentMaxJump, 0);
+                    StartCoroutine(JumpCooldown());
+                }
+
             
 
         }
@@ -233,6 +284,6 @@ public class CharacterController : MonoBehaviour
     {
         JCoolDown = true;
         yield return new WaitForSeconds(1.5f);
-         JCoolDown = false;
+        JCoolDown = false;
     }
 }
