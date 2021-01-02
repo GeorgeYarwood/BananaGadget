@@ -1,26 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
+
+    public enum abilityType { melee, ranged, movement };
+
     //Player in our scene
     GameObject Player;
 
     Rigidbody rb;
 
     //Movement Speed
-    float MoveSpeed = 8f;
+    float MoveSpeed = 20f;
 
     //drains over time
     float energycapacity = 2000f;
 
     float MaxJump = 25f;
     bool FireResitant = false;
+    
+
+    //Array of all available abilities
+    public Ability[] abilities = new Ability[2];
+
 
     //Array of abilities we currently have equiped
-    public Ability[] movementAbilties = new Ability[2];
-    public Ability[] physicalAbilities = new Ability[2];
+    public Ability[] currentAbilities = new Ability[3];
+
+
+    public Text energyTxt;
+
 
 
     // Start is called before the first frame update
@@ -42,16 +54,71 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    public void Fire() 
+    {
+        
+    }
+
     public void ApplyAbilities() 
     {
-        for(int i = 0; i<movementAbilties.Length; i++) 
+        for(int i = 0; i< currentAbilities.Length; i++) 
         {
-            MaxJump += movementAbilties[i].Jump;
-            FireResitant = movementAbilties[i].FireResitant;
+            //Apply jump stats
+            MaxJump += currentAbilities[i].Jump;
+
+            //Add movement speed
+            MoveSpeed += currentAbilities[i].Speed;
+
+            //Add energy
+            energycapacity += currentAbilities[i].Energy;
+
+            //Apply fire resistance
+            if (!FireResitant) 
+            {
+                FireResitant = currentAbilities[i].FireResitant;
+            }
+
+
+            //If we have a melee ability
+            if (currentAbilities[i].abType.Equals(abilityType.melee)) 
+            {
+               
+            }
+            //If we have a ranged ability
+            if (currentAbilities[i].abType.Equals(abilityType.ranged))
+            {
+               
+            }
+
+            //If we have a movement ability
+            if (currentAbilities[i].abType.Equals(abilityType.movement))
+            {
+
+            }
+
+
         }
 
     }
 
+
+    void Update()
+    {
+        energyTxt.text = "Energy Capacity: " + energycapacity.ToString();
+
+
+        if(energycapacity > 1f)
+        {
+            energycapacity -= 1f * Time.deltaTime;
+        }
+        else 
+        {
+            //Fail mission
+        }
+
+
+
+    }
 
     // For dem fast physex init
     void FixedUpdate()

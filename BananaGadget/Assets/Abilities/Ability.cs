@@ -13,6 +13,12 @@ public class Ability : ScriptableObject
 
     public float Jump;
 
+    public float Speed;
+
+    public float Damage;
+
+    public float Energy;
+
     public bool FireResitant;
 
     public abilityType abType;
@@ -29,7 +35,5 @@ public class Ability : ScriptableObject
 
     public bool doesdamage;
 
-    public float maxDmg;
-    public float minDmg;
 
 }
