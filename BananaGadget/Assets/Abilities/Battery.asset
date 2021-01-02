@@ -15,7 +15,7 @@ MonoBehaviour:
   Jump: 0
   Speed: 0
   Damage: 0
-  Energy: 1000
+  Energy: -500
   FireResitant: 0
   abType: 2
   abilityName: Battery

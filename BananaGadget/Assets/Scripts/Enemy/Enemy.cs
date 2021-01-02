@@ -18,5 +18,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         HealthTxt.text = Health.ToString();
+        if(Health <= 0f) 
+        {
+            Destroy(gameObject);
+        }
     }
 }

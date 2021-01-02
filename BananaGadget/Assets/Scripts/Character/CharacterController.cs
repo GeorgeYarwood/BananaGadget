@@ -13,15 +13,25 @@ public class CharacterController : MonoBehaviour
 
     Rigidbody rb;
 
+    //Base values
+
     //Movement Speed
     float MoveSpeed = 20f;
-
-    //drains over time
-    float energycapacity = 2000f;
-
+    //Drains over time
+    float energycapacity = 2000;
     float MaxJump = 25f;
     bool FireResitant = false;
     float Health = 100f;
+    float Dmg = 4f;
+
+
+    //Values we adjust
+    float currentMoveSpeed;
+    float currentEnergyCapacity;
+    float currentMaxJump;
+    bool  currentfireResist;
+    float currentHealth;
+    float currentDmg;
 
     //Array of all available abilities
     public Ability[] abilities = new Ability[2];
@@ -35,9 +45,15 @@ public class CharacterController : MonoBehaviour
 
 
     public int DmgEvent;
+
+
+    public GameObject Respawn;
+
     // Start is called before the first frame update
     void Start()
     {
+        ResetStats();
+
         Player = GameObject.FindGameObjectWithTag("Player");
 
         rb = Player.GetComponent<Rigidbody>();
@@ -47,6 +63,16 @@ public class CharacterController : MonoBehaviour
 
         CameraController.AddRayEvent("test", Test);
         DmgEvent = CameraController.AddRayEvent("Enemy", Damage);
+    }
+
+    private void ResetStats()
+    {
+        currentMoveSpeed = MoveSpeed;
+        currentEnergyCapacity = energycapacity;
+        currentMaxJump = MaxJump;
+        currentfireResist = FireResitant;
+        currentHealth = Health;
+        currentDmg = Dmg;
     }
 
     public void Test() 
@@ -61,7 +87,15 @@ public class CharacterController : MonoBehaviour
 
         Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
 
-        currentEnemy.Health -= 5f;
+        try
+        {
+            currentEnemy.Health -= currentDmg;
+        }
+        catch 
+        {
+            Debug.Log("Enemey not available, perhaps it's dead?");
+            
+        }
     }
 
     public void ApplyAbilities() 
@@ -69,18 +103,21 @@ public class CharacterController : MonoBehaviour
         for(int i = 0; i< currentAbilities.Length; i++) 
         {
             //Apply jump stats
-            MaxJump += currentAbilities[i].Jump;
+            currentMaxJump += currentAbilities[i].Jump;
 
             //Add movement speed
-            MoveSpeed += currentAbilities[i].Speed;
+            currentMoveSpeed += currentAbilities[i].Speed;
 
             //Add energy
-            energycapacity += currentAbilities[i].Energy;
+            currentEnergyCapacity += currentAbilities[i].Energy;
+
+            //Add damage
+            currentDmg += currentAbilities[i].Damage;
 
             //Apply fire resistance
-            if (!FireResitant) 
+            if (!currentfireResist) 
             {
-                FireResitant = currentAbilities[i].FireResitant;
+                currentfireResist = currentAbilities[i].FireResitant;
             }
 
 
@@ -109,19 +146,33 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        energyTxt.text = "Energy Capacity: " + energycapacity.ToString();
+        energyTxt.text = "Energy Capacity: " + currentEnergyCapacity.ToString();
 
 
-        if(energycapacity > 1f)
+        if(currentEnergyCapacity > 0f)
         {
-            energycapacity -= 1f * Time.deltaTime;
+            currentEnergyCapacity -= 1f * Time.deltaTime;
         }
-        else 
+
+        //Check for loss conditions
+
+        if(currentEnergyCapacity <= 0f || currentHealth <= 0f) 
         {
             //Fail mission
+            ResetStats();
+            ApplyAbilities();
+            //Reload Level
+            //
+            RespawnPlayer();
         }
 
 
+    }
+
+    void RespawnPlayer() 
+    {
+        //Move player back to respawn point
+        Player.transform.position = Respawn.transform.position;
 
     }
 
