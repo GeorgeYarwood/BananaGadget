@@ -12,7 +12,15 @@ public class CharacterController : MonoBehaviour
     //Movement Speed
     float MoveSpeed = 8f;
 
+    //drains over time
+    float energycapacity = 2000f;
 
+    float MaxJump = 25f;
+    bool FireResitant = false;
+
+    //Array of abilities we currently have equiped
+    public Ability[] movementAbilties = new Ability[2];
+    public Ability[] physicalAbilities = new Ability[2];
 
 
     // Start is called before the first frame update
@@ -23,6 +31,8 @@ public class CharacterController : MonoBehaviour
         rb = Player.GetComponent<Rigidbody>();
 
 
+        ApplyAbilities();
+
         CameraController.AddRayEvent("test", Test);
     }
 
@@ -31,6 +41,17 @@ public class CharacterController : MonoBehaviour
         Debug.Log("Working!");
 
     }
+
+    public void ApplyAbilities() 
+    {
+        for(int i = 0; i<movementAbilties.Length; i++) 
+        {
+            MaxJump += movementAbilties[i].Jump;
+            FireResitant = movementAbilties[i].FireResitant;
+        }
+
+    }
+
 
     // For dem fast physex init
     void FixedUpdate()
@@ -61,6 +82,13 @@ public class CharacterController : MonoBehaviour
 
         }
 
-        
+
+        if (Input.GetKey("space"))
+        {
+            rb.AddForce(0, MaxJump, 0);
+
+        }
+
+
     }
 }

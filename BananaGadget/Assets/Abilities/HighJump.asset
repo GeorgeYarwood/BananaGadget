@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c61dade2fa00494197772b555d8d761, type: 3}
+  m_Name: HighJump
+  m_EditorClassIdentifier: 
+  Jump: 85
+  FireResitant: 0
+  abType: 2
+  abilityName: HighJump
+  abilityIcon: {fileID: 0}
+  abilityModel: {fileID: 0}
+  hascooldown: 0
+  hasModel: 1
+  doesdamage: 0
+  maxDmg: 0
+  minDmg: 0

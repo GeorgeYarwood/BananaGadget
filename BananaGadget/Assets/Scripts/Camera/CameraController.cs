@@ -94,7 +94,7 @@ public class CameraController : MonoBehaviour
 
 
        
-        //currentCoroutine = StartCoroutine(CamReset());
+        currentCoroutine = StartCoroutine(CamReset());
 
         //TESTING
         /*
@@ -234,14 +234,14 @@ public class CameraController : MonoBehaviour
 
 
             //If mouse has moved since last update
-            if (lastMouse != rotXAxis)
+            if (lastMouse != rotYAxis)
             {
                 movingtotarget = false;
-                //StopCoroutine(currentCoroutine);
-                //currentCoroutine = StartCoroutine(CamReset());
+                StopCoroutine(currentCoroutine);
+                currentCoroutine = StartCoroutine(CamReset());
             }
 
-            lastMouse = rotXAxis;
+            lastMouse = rotYAxis;
         }
 
         //If we left click
