@@ -10,17 +10,32 @@ public class Conveyor : MonoBehaviour
     {
         CharacterController player;
         Rigidbody rb;
-        player = collision.gameObject.GetComponentInParent<CharacterController>();
-        rb = player.GetComponent<Rigidbody>();
+        try 
+        {
+            player = collision.gameObject.GetComponentInParent<CharacterController>();
+            rb = player.GetComponent<Rigidbody>();
+        }
+        catch 
+        {
+            rb = collision.gameObject.GetComponent<Rigidbody>();
+        }
+    
         rb.AddForce(0, 0, -15);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         CharacterController player;
-        player = collision.gameObject.GetComponentInParent<CharacterController>();
 
-        player.currentMoveSpeed += adjust;
+        try
+        {
+            player = collision.gameObject.GetComponentInParent<CharacterController>();
+            player.currentMoveSpeed += adjust;
+        }
+        catch
+        {
+            Debug.Log("No player found!");
+        }
 
     }
 
@@ -28,9 +43,17 @@ public class Conveyor : MonoBehaviour
     {
         CharacterController player;
         Rigidbody rb;
-        player = collision.gameObject.GetComponentInParent<CharacterController>();
+        try 
+        {
+            player = collision.gameObject.GetComponentInParent<CharacterController>();
 
-        player.currentMoveSpeed -= adjust;
+            player.currentMoveSpeed -= adjust;
+        }
+
+        catch 
+        {
+            Debug.Log("No player found!");
+        }
     }
 
 }

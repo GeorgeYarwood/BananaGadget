@@ -21,34 +21,53 @@ public class Frost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        player = other.gameObject.GetComponentInParent<CharacterController>();
-        if (!player.currentfrostResist)
+        try 
         {
-           
-            player.currentMoveSpeed -= speedreduction;
-            //Show frost effect on screen
+            player = other.gameObject.GetComponentInParent<CharacterController>();
+            if (!player.currentfrostResist)
+            {
+
+                player.currentMoveSpeed -= speedreduction;
+                //Show frost effect on screen
+            }
+            else
+            {
+                Debug.Log("Player is immune to frost!");
+            }
         }
-        else
+        catch 
         {
-            Debug.Log("Player is immune to frost!");
+            Debug.Log("yes");
+
         }
+
 
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        player = other.gameObject.GetComponentInParent<CharacterController>();
+        try 
+        {
+            player = other.gameObject.GetComponentInParent<CharacterController>();
 
-        if (!player.currentfrostResist)
-        {
-            player.currentMoveSpeed += speedreduction;
-            //Disable frost effect
+            if (!player.currentfrostResist)
+            {
+                player.currentMoveSpeed += speedreduction;
+                //Disable frost effect
+            }
+            else
+            {
+                Debug.Log("Player is immune to frost!");
+            }
         }
-        else
+
+        catch 
         {
-            Debug.Log("Player is immune to frost!");
+            Debug.Log("yes");
+
         }
+      
     }
 
 }
