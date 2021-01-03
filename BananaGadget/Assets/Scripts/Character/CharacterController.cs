@@ -23,6 +23,9 @@ public class CharacterController : MonoBehaviour
     public Enemy[] enemies = new Enemy[4];
 
 
+    public AudioClip shoot;
+    public AudioClip shoot3;
+
     public static bool levelstart;
 
     //Base values
@@ -168,6 +171,9 @@ public class CharacterController : MonoBehaviour
         {
             playerAnim[i].SetTrigger("Shoot");
         }
+
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlaySoundEffect(shoot);
+
 
         Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
 
@@ -394,11 +400,13 @@ public class CharacterController : MonoBehaviour
                     Animator turranim = hit.transform.GetComponent<Animator>();
                     turranim.SetTrigger("Fire");
                     currentHealth -= 5f;
+                    GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().PlaySoundEffect(shoot3);
 
-                }
 
-     
-            
+            }
+
+
+
         }
         
     }

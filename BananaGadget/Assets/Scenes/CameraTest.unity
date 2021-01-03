@@ -3618,6 +3618,8 @@ MonoBehaviour:
   canvas: {fileID: 575817863}
   enemies:
   - {fileID: 1188894746}
+  shoot: {fileID: 8300000, guid: 11ed0a4d30c66114bbc0f4ee12f04e4f, type: 3}
+  shoot3: {fileID: 0}
   currentMoveSpeed: 0
   currentEnergyCapacity: 0
   currentMaxJump: 0

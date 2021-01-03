@@ -8657,6 +8657,8 @@ MonoBehaviour:
   enemies:
   - {fileID: 476379944}
   - {fileID: 743006016}
+  shoot: {fileID: 0}
+  shoot3: {fileID: 8300000, guid: 9f0baa2eabfa11d4fbac336fb6bd9858, type: 3}
   currentMoveSpeed: 0
   currentEnergyCapacity: 0
   currentMaxJump: 0
