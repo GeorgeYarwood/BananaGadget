@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
-    float healthreduction = 5f;
+    float healthreduction = 20f;
     float speedpenalty = 2f;
 
     bool infire = false;

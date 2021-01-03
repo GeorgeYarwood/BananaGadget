@@ -82,6 +82,8 @@ public class CharacterController : MonoBehaviour
 
         rb = Player.GetComponent<Rigidbody>();
 
+        rb.isKinematic = true;
+
         ResetStats();
 
         //ApplyAbilities();
@@ -280,6 +282,7 @@ public class CharacterController : MonoBehaviour
 
         if (initlvl)
         {
+            rb.isKinematic = false;
             ResetStats();
             ApplyAbilities();
             initlvl = false;
@@ -362,7 +365,7 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         //If we're not in the air
-        if(Player.transform.position.y < 5f) 
+        if(Player.transform.position.y < 6f) 
         {
             isAirborne = false;
 
