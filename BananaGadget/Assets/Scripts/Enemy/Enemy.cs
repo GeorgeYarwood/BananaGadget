@@ -23,5 +23,12 @@ public class Enemy : MonoBehaviour
             //Destroy(gameObject);
             gameObject.SetActive(false);
         }
-    }
+
+
+
+
+
+
+
+        }
 }

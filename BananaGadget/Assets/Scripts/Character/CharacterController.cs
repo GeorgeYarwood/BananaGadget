@@ -92,7 +92,7 @@ public class CharacterController : MonoBehaviour
         //ApplyAbilities();
 
         //CameraController.AddRayEvent("test", Test);
-        DoorEvent = CameraController.AddRayEvent("doorButton", Door, 10);
+        DoorEvent = CameraController.AddRayEvent("doorButton", Door, 20);
         bananaint = CameraController.AddRayEvent("banana", Banana, 40);
     }
 
@@ -245,7 +245,7 @@ public class CharacterController : MonoBehaviour
                 if (currentAbilities[i].abType == global::abilityType.ranged)
                 {
                     //Set melee damage function
-                    rangeDmgEvent = CameraController.AddRayEvent("Enemy", RangedDamage, 40);
+                    rangeDmgEvent = CameraController.AddRayEvent("Enemy", RangedDamage, 150);
 
                 }
 
@@ -269,6 +269,7 @@ public class CharacterController : MonoBehaviour
     
     void Update()
     {
+
         energyTxt.text = "REM ENRG: " + currentEnergyCapacity.ToString();
         healthTxt.text = "INTEGRITY: " + currentHealth.ToString() + "%";
 
@@ -276,11 +277,12 @@ public class CharacterController : MonoBehaviour
         {
             currentEnergyCapacity -= 1f * Time.deltaTime;
         }
+        TurretDmg();
 
 
         //Check for loss conditions
 
-        if(currentEnergyCapacity <= 0f || currentHealth <= 0f) 
+        if (currentEnergyCapacity <= 0f || currentHealth <= 0f) 
         {
             //Fail mission
             ResetStats();
@@ -288,6 +290,7 @@ public class CharacterController : MonoBehaviour
             //Reload Level
             //
             RespawnPlayer();
+
         }
 
         if (initlvl)
@@ -374,6 +377,28 @@ public class CharacterController : MonoBehaviour
 
     }
     
+
+    void TurretDmg() 
+    {
+        int chance = Random.Range(0, 125);
+
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 15f))
+        {
+          
+            
+                if (hit.transform.tag == "Enemy" && chance == 50)
+                {
+                currentHealth -= 5f;
+
+                }
+            
+        }
+        
+    }
+
     // For dem fast physex init
     void FixedUpdate()
     {
