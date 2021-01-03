@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Battery
   m_EditorClassIdentifier: 
   Jump: 0
-  Speed: 0
+  Speed: -2
   Damage: 0
   Energy: 200
   FireResitant: 0
