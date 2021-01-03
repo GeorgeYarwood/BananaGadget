@@ -18,6 +18,7 @@ public class CharacterController : MonoBehaviour
 
     public States PlayerState;
 
+    public GameObject canvas;
 
     public Enemy[] enemies = new Enemy[4];
 
@@ -355,9 +356,12 @@ public class CharacterController : MonoBehaviour
         //Re-enable and reset all enemies
         for(int i = 0; i < enemies.Length; i++) 
         {
-            enemies[i].Health = 100f;
-            enemies[i].gameObject.SetActive(true);
+           enemies[i].Health = 100f;
+           enemies[i].gameObject.SetActive(true);
         }
+        Cursor.lockState = CursorLockMode.None;
+        StartManager.InitGame();
+        canvas.SetActive(true);
 
     }
     
