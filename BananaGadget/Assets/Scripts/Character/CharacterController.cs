@@ -12,6 +12,8 @@ public class CharacterController : MonoBehaviour
     //Player in our scene
     GameObject Player;
 
+    Animator playerAnim;
+
     Rigidbody rb;
 
     public States PlayerState;
@@ -70,6 +72,8 @@ public class CharacterController : MonoBehaviour
         ResetStats();
 
         Player = GameObject.FindGameObjectWithTag("Player");
+
+        playerAnim = Player.GetComponentInChildren<Animator>();
 
         rb = Player.GetComponent<Rigidbody>();
 
@@ -226,6 +230,9 @@ public class CharacterController : MonoBehaviour
         switch (PlayerState) 
         {
             case States.idle:
+
+                playerAnim.SetTrigger("Idle");
+
                 if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
                 {
                     PlayerState = States.walk;
@@ -239,8 +246,9 @@ public class CharacterController : MonoBehaviour
                 break;
 
             case States.walk:
+                playerAnim.SetTrigger("Run");
 
-                if (!Input.GetKey("w") || !Input.GetKey("s") || !Input.GetKey("a") || !Input.GetKey("d"))
+                if (Input.GetKeyUp("w") || Input.GetKeyUp("s") || Input.GetKeyUp("a") || Input.GetKeyUp("d"))
                 {
                     PlayerState = States.idle;
 
@@ -251,8 +259,9 @@ public class CharacterController : MonoBehaviour
                 }
                 break;
             case States.jump:
-              
-                if(!isAirborne)
+                playerAnim.SetTrigger("Jump");
+
+                if (!isAirborne)
                 {
                     PlayerState = States.idle;
                 }

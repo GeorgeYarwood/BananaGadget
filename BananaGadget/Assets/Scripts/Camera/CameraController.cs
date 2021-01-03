@@ -8,8 +8,8 @@ public class CameraController : MonoBehaviour
     GameObject Player;
 
     //Offset that will be applied to camera upon movement
-    Quaternion Rotoffset = Quaternion.Euler(-5f, 0, 0);
-    Vector3 Posoffset = new Vector3(0, 3, -6);
+    Quaternion Rotoffset = Quaternion.Euler(-15f, 0, 0);
+    Vector3 Posoffset = new Vector3(0, 6, -6);
     int rotX = 11;
     int rotY = 0;
     int rotZ = 0;
