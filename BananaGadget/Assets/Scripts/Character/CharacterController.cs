@@ -95,19 +95,20 @@ public class CharacterController : MonoBehaviour
 
     public void EquipAbility(string AbilityName) 
     {
+        string slot = AbilityName.Substring(AbilityName.Length - 1);
+
+        int slotint = int.Parse(slot);
+
+        char ToRemove = char.Parse(slot);
+
         for(int i = 0; i< abilities.Length; i++) 
         {
-            if(abilities[i].name == AbilityName) 
+            if(abilities[i].name == AbilityName.TrimEnd(ToRemove)) 
             {
-                for(int x = 0; x<currentAbilities.Length; x++) 
-                {
-                    if(currentAbilities[x] == null) 
-                    {
-                        currentAbilities[x] = abilities[i];
-                        break;
-                    }
-                }
-                break;
+                 currentAbilities[slotint] = abilities[i];
+                 break;
+  
+
             }
         }
     }
@@ -243,7 +244,7 @@ public class CharacterController : MonoBehaviour
 
     }
 
-
+    
     void Update()
     {
         energyTxt.text = "Energy Capacity: " + currentEnergyCapacity.ToString();

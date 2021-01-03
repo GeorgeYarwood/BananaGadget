@@ -234,13 +234,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77972398}
-  m_LocalRotation: {x: 0.16274059, y: -0, z: -0, w: 0.9866689}
-  m_LocalPosition: {x: 6.97137, y: 4.98, z: -16.19}
+  m_LocalRotation: {x: 0.012551907, y: 0.9837297, z: -0.1622568, w: 0.07609956}
+  m_LocalPosition: {x: 6.97137, y: 5.43, z: -16.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 18.732, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18.732, y: 171.153, z: 0}
 --- !u!114 &77972402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1586,7 +1586,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Punch
+          m_StringArgument: Punch0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &236507490
@@ -2891,7 +2891,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Gun
+          m_StringArgument: Gun0
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &782037048
@@ -3171,7 +3171,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: RegularLegs
+          m_StringArgument: RegularLegs1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &824087728
@@ -3603,7 +3603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054316703}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: -0.306, z: -6.73}
+  m_LocalPosition: {x: 0.32, y: -0.306, z: -6.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 559838346}
@@ -6430,7 +6430,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: HighJump
+          m_StringArgument: HighJump1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1664917996
@@ -6653,7 +6653,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: FireResist
+          m_StringArgument: FireResist2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1703053810
@@ -6955,7 +6955,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: FrostResist
+          m_StringArgument: FrostResist2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1746881521
@@ -7731,7 +7731,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Battery
+          m_StringArgument: Battery2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1993264571
