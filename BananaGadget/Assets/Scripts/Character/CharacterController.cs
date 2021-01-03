@@ -72,6 +72,8 @@ public class CharacterController : MonoBehaviour
 
     bool isAirborne= false;
 
+    int bananaint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,10 +93,17 @@ public class CharacterController : MonoBehaviour
 
         //CameraController.AddRayEvent("test", Test);
         DoorEvent = CameraController.AddRayEvent("doorButton", Door, 10);
+        bananaint = CameraController.AddRayEvent("banana", Banana, 40);
     }
 
+    //Banana go brr
+    public void Banana() 
+    {
+        currentEnergyCapacity += 5f;
+        Transform currentTransform = CameraController.RayQueue[bananaint].hit;
 
-  
+        Destroy(currentTransform.gameObject);
+    }
 
     public void EquipAbility(string AbilityName) 
     {
@@ -261,7 +270,7 @@ public class CharacterController : MonoBehaviour
     void Update()
     {
         energyTxt.text = "REM ENRG: " + currentEnergyCapacity.ToString();
-        healthTxt.text = "HEALTH: " + currentHealth.ToString();
+        healthTxt.text = "INTEGRITY: " + currentHealth.ToString() + "%";
 
         if(currentEnergyCapacity > 0f && levelstart)
         {
