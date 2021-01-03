@@ -391,9 +391,13 @@ public class CharacterController : MonoBehaviour
             
                 if (hit.transform.tag == "Enemy" && chance == 50)
                 {
-                currentHealth -= 5f;
+                    Animator turranim = hit.transform.GetComponent<Animator>();
+                    turranim.SetTrigger("Fire");
+                    currentHealth -= 5f;
 
                 }
+
+     
             
         }
         
