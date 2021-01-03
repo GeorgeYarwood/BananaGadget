@@ -30,7 +30,7 @@ public class CharacterController : MonoBehaviour
     //Movement Speed
     float MoveSpeed = 20f;
     //Drains over time
-    float energycapacity = 400;
+    float energycapacity = 100;
     float MaxJump = 0f;
     bool FireResitant = false;
     bool FrostResitant = false;
@@ -260,8 +260,8 @@ public class CharacterController : MonoBehaviour
     
     void Update()
     {
-        energyTxt.text = "Energy Capacity: " + currentEnergyCapacity.ToString();
-        healthTxt.text = "Health: " + currentHealth.ToString();
+        energyTxt.text = "REM ENRG: " + currentEnergyCapacity.ToString();
+        healthTxt.text = "HEALTH: " + currentHealth.ToString();
 
         if(currentEnergyCapacity > 0f && levelstart)
         {

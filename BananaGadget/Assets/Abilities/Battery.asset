@@ -15,7 +15,7 @@ MonoBehaviour:
   Jump: 0
   Speed: 0
   Damage: 0
-  Energy: 100
+  Energy: 200
   FireResitant: 0
   FrostResitant: 0
   abType: 2
