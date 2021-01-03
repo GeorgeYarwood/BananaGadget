@@ -13,6 +13,8 @@ public class CharacterCustomizer : MonoBehaviour
     public GameObject legText;
     public GameObject otherText;
 
+
+
     void Start()
     {
         armText.GetComponent<Text>().text = arm[0].GetComponent<PartProperty>().description;

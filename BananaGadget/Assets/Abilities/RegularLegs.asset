@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c61dade2fa00494197772b555d8d761, type: 3}
-  m_Name: HighJump
+  m_Name: RegularLegs
   m_EditorClassIdentifier: 
-  Jump: 1200
-  Speed: -5
+  Jump: 0
+  Speed: 5
   Damage: 0
   Energy: 0
   FireResitant: 0
   FrostResitant: 0
   abType: 2
-  abilityName: HighJump
+  abilityName: RegularLegs
   abilityIcon: {fileID: 0}
   abilityModel: {fileID: 0}
   hascooldown: 0
-  hasModel: 1
+  hasModel: 0
   doesdamage: 0

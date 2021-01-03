@@ -22,13 +22,15 @@ public class CharacterController : MonoBehaviour
     public Enemy[] enemies = new Enemy[4];
 
 
+    public static bool levelstart;
+
     //Base values
 
     //Movement Speed
     float MoveSpeed = 20f;
     //Drains over time
     float energycapacity = 400;
-    float MaxJump = 300f;
+    float MaxJump = 0f;
     bool FireResitant = false;
     bool FrostResitant = false;
     float Health = 100f;
@@ -45,12 +47,15 @@ public class CharacterController : MonoBehaviour
     public float currentDmg;
 
     //Array of all available abilities
-    public Ability[] abilities = new Ability[2];
+    public Ability[] abilities = new Ability[4];
 
+   
 
     //Array of abilities we currently have equiped
     public Ability[] currentAbilities = new Ability[3];
 
+
+    public static bool initlvl = false;
 
     public Text energyTxt;
     public Text healthTxt;
@@ -69,7 +74,7 @@ public class CharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetStats();
+        //ResetStats();
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
@@ -77,11 +82,34 @@ public class CharacterController : MonoBehaviour
 
         rb = Player.GetComponent<Rigidbody>();
 
+        ResetStats();
 
-        ApplyAbilities();
+        //ApplyAbilities();
 
         //CameraController.AddRayEvent("test", Test);
         DoorEvent = CameraController.AddRayEvent("doorButton", Door, 10);
+    }
+
+
+  
+
+    public void EquipAbility(string AbilityName) 
+    {
+        for(int i = 0; i< abilities.Length; i++) 
+        {
+            if(abilities[i].name == AbilityName) 
+            {
+                for(int x = 0; x<currentAbilities.Length; x++) 
+                {
+                    if(currentAbilities[x] == null) 
+                    {
+                        currentAbilities[x] = abilities[i];
+                        break;
+                    }
+                }
+                break;
+            }
+        }
     }
 
     private void ResetStats()
@@ -102,6 +130,11 @@ public class CharacterController : MonoBehaviour
     {
         Debug.Log("Working!");
 
+    }
+
+    public void RefreshAnimator() 
+    {
+        playerAnim = Player.GetComponentsInChildren<Animator>();
     }
 
     public void Door()
@@ -151,52 +184,60 @@ public class CharacterController : MonoBehaviour
     {
         for(int i = 0; i< currentAbilities.Length; i++) 
         {
-            //Apply jump stats
-            currentMaxJump += currentAbilities[i].Jump;
-
-            //Add movement speed
-            currentMoveSpeed += currentAbilities[i].Speed;
-
-            //Add energy
-            currentEnergyCapacity += currentAbilities[i].Energy;
-
-            //Add damage
-            currentDmg += currentAbilities[i].Damage;
-
-            //Apply fire resistance
-            if (!currentfireResist) 
+            try
             {
-                currentfireResist = currentAbilities[i].FireResitant;
-            }
+                //Apply jump stats
+                currentMaxJump += currentAbilities[i].Jump;
 
-            //Apply frost resistance
-            if (!currentfrostResist)
+                //Add movement speed
+                currentMoveSpeed += currentAbilities[i].Speed;
+
+                //Add energy
+                currentEnergyCapacity += currentAbilities[i].Energy;
+
+                //Add damage
+                currentDmg += currentAbilities[i].Damage;
+
+                //Apply fire resistance
+                if (!currentfireResist)
+                {
+                    currentfireResist = currentAbilities[i].FireResitant;
+                }
+
+                //Apply frost resistance
+                if (!currentfrostResist)
+                {
+                    currentfrostResist = currentAbilities[i].FrostResitant;
+                }
+
+
+                //If we have a melee ability
+                if (currentAbilities[i].abType == global::abilityType.melee)
+                {
+                    //Set melee damage function
+                    meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 10);
+
+                }
+                //If we have a ranged ability
+                if (currentAbilities[i].abType == global::abilityType.ranged)
+                {
+                    //Set melee damage function
+                    rangeDmgEvent = CameraController.AddRayEvent("Enemy", RangedDamage, 40);
+
+                }
+
+                //If we have a movement ability
+                if (currentAbilities[i].abType == global::abilityType.movement)
+                {
+
+                }
+
+            }
+            catch 
             {
-                currentfrostResist = currentAbilities[i].FrostResitant;
+                Debug.Log("Missing some abilites in slots!");
             }
-
-
-            //If we have a melee ability
-            if (currentAbilities[i].abType == global::abilityType.melee)
-            {
-                //Set melee damage function
-                meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 10);
-
-            }
-            //If we have a ranged ability
-            if (currentAbilities[i].abType == global::abilityType.ranged)
-            {
-                //Set melee damage function
-                rangeDmgEvent = CameraController.AddRayEvent("Enemy", RangedDamage, 40);
-
-            }
-
-            //If we have a movement ability
-            if (currentAbilities[i].abType == global::abilityType.movement)
-            {
-
-            }
-
+           
 
         }
 
@@ -208,10 +249,11 @@ public class CharacterController : MonoBehaviour
         energyTxt.text = "Energy Capacity: " + currentEnergyCapacity.ToString();
         healthTxt.text = "Health: " + currentHealth.ToString();
 
-        if(currentEnergyCapacity > 0f)
+        if(currentEnergyCapacity > 0f && levelstart)
         {
             currentEnergyCapacity -= 1f * Time.deltaTime;
         }
+
 
         //Check for loss conditions
 
@@ -225,7 +267,12 @@ public class CharacterController : MonoBehaviour
             RespawnPlayer();
         }
 
-
+        if (initlvl)
+        {
+            ResetStats();
+            ApplyAbilities();
+            initlvl = false;
+        }
 
         switch (PlayerState) 
         {

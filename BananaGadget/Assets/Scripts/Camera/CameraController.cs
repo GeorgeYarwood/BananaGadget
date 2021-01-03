@@ -39,7 +39,7 @@ public class CameraController : MonoBehaviour
     static Quaternion shadowRot;
 
     //Sets minimum distance from target for camera automatic movement
-    float mintargetdistance = 5f;
+    float mintargetdistance = 1f;
 
     //Base speed for the auto zoom
     float autozoomspeed = 10f;
@@ -70,9 +70,8 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
 
-        FollowPlayer = true;
+        //FollowPlayer = true;
 
         //Find our camera
         mainCam = FindObjectOfType<Camera>();
@@ -137,6 +136,7 @@ public class CameraController : MonoBehaviour
 
     static public void BackToPlayer(bool Animate)
     {
+        Cursor.lockState = CursorLockMode.Locked;
         movingtotarget = false;
         FollowPlayer = true;
 
