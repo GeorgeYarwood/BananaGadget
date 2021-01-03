@@ -12,7 +12,7 @@ public class CharacterController : MonoBehaviour
     //Player in our scene
     GameObject Player;
 
-    Animator playerAnim;
+    Animator [] playerAnim = new Animator[3];
 
     Rigidbody rb;
 
@@ -73,7 +73,7 @@ public class CharacterController : MonoBehaviour
 
         Player = GameObject.FindGameObjectWithTag("Player");
 
-        playerAnim = Player.GetComponentInChildren<Animator>();
+        playerAnim = Player.GetComponentsInChildren<Animator>();
 
         rb = Player.GetComponent<Rigidbody>();
 
@@ -231,7 +231,11 @@ public class CharacterController : MonoBehaviour
         {
             case States.idle:
 
-                playerAnim.SetTrigger("Idle");
+                for(int i = 0; i < playerAnim.Length; i++) 
+                {
+                    playerAnim[i].SetTrigger("Idle");
+
+                }
 
                 if (Input.GetKey("w") || Input.GetKey("s") || Input.GetKey("a") || Input.GetKey("d"))
                 {
@@ -246,7 +250,11 @@ public class CharacterController : MonoBehaviour
                 break;
 
             case States.walk:
-                playerAnim.SetTrigger("Run");
+
+                for (int i = 0; i < playerAnim.Length; i++)
+                {
+                    playerAnim[i].SetTrigger("Run");
+                }
 
                 if (Input.GetKeyUp("w") || Input.GetKeyUp("s") || Input.GetKeyUp("a") || Input.GetKeyUp("d"))
                 {
@@ -259,11 +267,15 @@ public class CharacterController : MonoBehaviour
                 }
                 break;
             case States.jump:
-                playerAnim.SetTrigger("Jump");
+                for (int i = 0; i < playerAnim.Length; i++)
+                {
+                    playerAnim[i].SetTrigger("Jump");
+                }
 
                 if (!isAirborne)
                 {
                     PlayerState = States.idle;
+                    
                 }
 
                 break;
@@ -292,7 +304,7 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         //If we're not in the air
-        if(Player.transform.position.y < 2f) 
+        if(Player.transform.position.y < 5f) 
         {
             isAirborne = false;
 
