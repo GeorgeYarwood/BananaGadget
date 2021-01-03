@@ -152,6 +152,11 @@ public class CharacterController : MonoBehaviour
     {
         Transform currentTransform = CameraController.RayQueue[rangeDmgEvent].hit;
 
+        for (int i = 0; i < playerAnim.Length; i++)
+        {
+            playerAnim[i].SetTrigger("Shoot");
+        }
+
         Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
 
         try
@@ -169,6 +174,11 @@ public class CharacterController : MonoBehaviour
         Transform currentTransform = CameraController.RayQueue[meleeDmgEvent].hit;
 
         Enemy currentEnemy = currentTransform.GetComponentInChildren<Enemy>();
+
+        for (int i = 0; i < playerAnim.Length; i++)
+        {
+            playerAnim[i].SetTrigger("Punch");
+        }
 
         try
         {
@@ -216,7 +226,7 @@ public class CharacterController : MonoBehaviour
                 if (currentAbilities[i].abType == global::abilityType.melee)
                 {
                     //Set melee damage function
-                    meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 10);
+                    meleeDmgEvent = CameraController.AddRayEvent("Enemy", MeleeDamage, 15);
 
                 }
                 //If we have a ranged ability
